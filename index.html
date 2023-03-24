@@ -12,18 +12,34 @@
     />
     <style type="text/tailwindcss">
       @layer components {
+        /* Ho messo un background-color a tutti i bottoni/link per far capire all'utente che sono cliccabili, quindi li ho adattati per rispettare i canoni di UX e UI come richiesto sulla traccia */
+
         #main_left > header > ul > li > a,
         #chat_header-right > button,
         #chat_header-left--image > button,
         #chat_input > button {
-          @apply flex items-center p-3 rounded-full hover:bg-zinc-700 cursor-pointer;
+          @apply flex items-center p-3 max-sm:p-2 rounded-full bg-zinc-700 hover:bg-zinc-600 shadow-lg;
+        }
+
+        #main_left-searchbar,
+        #chat_input > input {
+          @apply border-0 border-zinc-500 focus-within:border;
         }
 
         .contact {
           @apply flex items-center my-6 p-2 cursor-pointer justify-between rounded-lg hover:bg-zinc-700;
         }
 
-        .selected {
+        #main_left > header > ul > li > a.selected {
+          @apply text-emerald-600;
+        }
+
+        .contact,
+        #menu_bar > button {
+          @apply border border-zinc-700;
+        }
+
+        .contact.selected {
           @apply bg-zinc-700;
         }
 
@@ -44,7 +60,7 @@
         }
 
         .contact_txt > p {
-          @apply text-sm;
+          @apply text-sm text-gray-400 flex items-center gap-1;
         }
 
         .contact_right {
@@ -104,9 +120,9 @@
     <main class="flex">
       <section
         id="main_left"
-        class="w-1/4 py-6 px-4 max-sm:hidden max-lg:hidden border-r border-gray-600"
+        class="w-1/4 py-6 px-4 max-sm:hidden max-lg:hidden border-r border-zinc-700"
       >
-        <header id="menu_bar" class="border-b border-gray-600 py-4">
+        <header id="menu_bar" class="border-b border-zinc-700 py-4">
           <!-- La piccola barra di sinistra visibile nella traccia, l'ho spostata usandola come header di questa sezione, cosi' da essere piu' visibile -->
           <ul class="flex justify-between">
             <li>
@@ -145,7 +161,7 @@
           </div>
 
           <button
-            class="flex items-center gap-4 p-2 w-full rounded-lg hover:bg-zinc-700"
+            class="flex items-center gap-4 p-2 w-full rounded-lg hover:bg-zinc-600"
           >
             <span class="material-symbols-outlined"> inventory_2 </span>
             Archived
@@ -209,7 +225,10 @@
                 </div>
                 <div class="contact_txt">
                   <h2>Leo Messi</h2>
-                  <p>Lorem ipsum dolor sit amet..</p>
+                  <p>
+                    <span class="material-symbols-outlined"> done_all </span>
+                    Tu: Lorem ipsum dolor sit amet..
+                  </p>
                 </div>
               </div>
               <div class="contact_right">
@@ -258,7 +277,10 @@
                 </div>
                 <div class="contact_txt">
                   <h2>Mark Zuckerberg</h2>
-                  <p>Tu: Ma chi lo usa piu' Mess...</p>
+                  <p>
+                    <span class="material-symbols-outlined"> done_all </span>
+                    Tu: Ma chi lo usa piu' Mess...
+                  </p>
                 </div>
               </div>
               <div class="contact_right">
@@ -291,15 +313,15 @@
               />
             </div>
             <div id="chat_header-left--text">
-              <h2 class="text-lg max-sm:text-sm font-semibold">Full-stack Dev [Feb2023]</h2>
-              <p class="max-sm:hidden text-xs">
-                Riccardo sta scrivendo...
-              </p>
+              <h2 class="text-lg max-sm:text-sm font-semibold">
+                Full-stack Dev [Feb2023]
+              </h2>
+              <p class="max-sm:hidden text-xs">Riccardo sta scrivendo...</p>
             </div>
           </div>
           <div
             id="chat_header-right"
-            class="flex items-center gap-4 max-sm:gap-0"
+            class="flex items-center gap-4 max-sm:gap-2"
           >
             <button>
               <span class="material-symbols-outlined"> videocam </span>
@@ -350,7 +372,7 @@
         </div>
         <div
           id="chat_input"
-          class="flex items-center gap-4 max-sm:gap-0 p-4 h-[10%]"
+          class="flex items-center gap-4 max-sm:gap-2 p-4 h-[10%]"
         >
           <button><span class="material-symbols-outlined"> mood </span></button>
           <button>
