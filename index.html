@@ -12,9 +12,10 @@
     />
     <style type="text/tailwindcss">
       @layer components {
-        #main_left > header > ul > li,
-        #chat_header-right > span,
-        #chat_input > span {
+        #main_left > header > ul > li > a,
+        #chat_header-right > button,
+        #chat_header-left--image > button,
+        #chat_input > button {
           @apply flex items-center p-3 rounded-full hover:bg-zinc-700 cursor-pointer;
         }
 
@@ -22,12 +23,16 @@
           @apply flex items-center my-6 p-2 cursor-pointer justify-between rounded-lg hover:bg-zinc-700;
         }
 
+        .selected {
+          @apply bg-zinc-700;
+        }
+
         .contact_left {
           @apply flex items-center w-4/5;
         }
 
         .contact_img > img {
-          @apply rounded-full w-14;
+          @apply rounded-full w-14 aspect-square;
         }
 
         .contact_txt {
@@ -51,11 +56,19 @@
         }
 
         .contact_right.unread > p:last-child {
-          @apply py-1 px-2 text-white bg-emerald-600 rounded-full;
+          @apply py-1 px-2 mt-1 text-white text-xs bg-emerald-600 rounded-full;
+        }
+
+        #chat_header-left--image > button {
+          @apply hidden max-sm:flex max-lg:flex;
+        }
+
+        #chat_header-right > button:last-child {
+          @apply flex max-sm:hidden;
         }
 
         .received_message {
-          @apply max-w-sm p-3 rounded-lg bg-zinc-800 shadow-lg mb-4 flex flex-col;
+          @apply max-w-sm p-3 rounded-lg bg-zinc-800 shadow-lg mb-4 flex flex-col max-sm:max-w-[200px];
         }
 
         .received_message > p:last-child {
@@ -67,7 +80,7 @@
         }
 
         .sended_message {
-          @apply max-w-sm ml-auto p-3 rounded-lg bg-emerald-800 shadow-lg mb-4 flex flex-col;
+          @apply max-w-sm ml-auto p-3 rounded-lg bg-emerald-800 shadow-lg mb-4 flex flex-col max-sm:max-w-[200px];
         }
 
         .sended_message > p:last-child {
@@ -75,6 +88,12 @@
         }
       }
       @layer base {
+        html,
+        body,
+        main {
+          @apply h-full;
+        }
+
         body {
           @apply bg-zinc-800 text-white;
         }
@@ -83,21 +102,39 @@
   </head>
   <body>
     <main class="flex">
-      <section id="main_left" class="w-1/4 py-6 px-4">
-        <header>
-          <!-- La piccola barra di sinistra della traccia, l'ho spostata usandola come header di questa sezione, cosi' da essere piu' visibili -->
+      <section
+        id="main_left"
+        class="w-1/4 py-6 px-4 max-sm:hidden max-lg:hidden border-r border-gray-600"
+      >
+        <header id="menu_bar" class="border-b border-gray-600 py-4">
+          <!-- La piccola barra di sinistra visibile nella traccia, l'ho spostata usandola come header di questa sezione, cosi' da essere piu' visibile -->
           <ul class="flex justify-between">
-            <li><span class="material-symbols-outlined"> chat </span></li>
-            <li><span class="material-symbols-outlined"> call </span></li>
             <li>
-              <span class="material-symbols-outlined"> web_stories </span>
+              <a href="#" class="selected"
+                ><span class="material-symbols-outlined"> chat </span></a
+              >
             </li>
             <li>
-              <span class="material-symbols-outlined"> account_circle </span>
+              <a href="#"
+                ><span class="material-symbols-outlined"> call </span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><span class="material-symbols-outlined"> web_stories </span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><span class="material-symbols-outlined">
+                  account_circle
+                </span></a
+              >
             </li>
           </ul>
           <div
-            class="main_left-searchbar my-8 flex items-center bg-zinc-600 p-2 rounded-lg"
+            id="main_left-searchbar"
+            class="my-8 flex items-center bg-zinc-600 p-2 rounded-lg"
           >
             <input
               type="text"
@@ -132,34 +169,19 @@
               </div>
             </div>
           </li>
-          <div class="contact">
-            <div class="contact_left">
-              <div class="contact_img">
-                <img src="assets/images/digitazon.png" alt="profile pic" />
-              </div>
-              <div class="contact_txt">
-                <h2>Full-stack Dev [Feb2023]</h2>
-                <p>Tu: Anche io sono in attesa</p>
-              </div>
-            </div>
-            <div class="contact_right">
-              <p>9:36 AM</p>
-            </div>
-          </div>
           <li>
-            <div class="contact">
+            <div class="contact selected">
               <div class="contact_left">
                 <div class="contact_img">
-                  <img src="assets/images/sainz.png" alt="profile pic" />
+                  <img src="assets/images/digitazon.png" alt="profile pic" />
                 </div>
                 <div class="contact_txt">
-                  <h2>Carlos Sainz</h2>
-                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                  <h2>Full-stack Dev [Feb2023]</h2>
+                  <p>Riccardo sta scrivendo...</p>
                 </div>
               </div>
-              <div class="contact_right unread">
-                <p>11:03 AM</p>
-                <p>4</p>
+              <div class="contact_right">
+                <p>9:36 AM</p>
               </div>
             </div>
           </li>
@@ -167,16 +189,15 @@
             <div class="contact">
               <div class="contact_left">
                 <div class="contact_img">
-                  <img src="assets/images/sainz.png" alt="profile pic" />
+                  <img src="assets/images/leclerc.jpg" alt="profile pic" />
                 </div>
                 <div class="contact_txt">
-                  <h2>Carlos Sainz</h2>
-                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                  <h2>Charles Leclerc</h2>
+                  <p>Lorem ipsum dolor sit amet..</p>
                 </div>
               </div>
-              <div class="contact_right unread">
-                <p>11:03 AM</p>
-                <p>4</p>
+              <div class="contact_right">
+                <p>09:30 AM</p>
               </div>
             </div>
           </li>
@@ -184,16 +205,15 @@
             <div class="contact">
               <div class="contact_left">
                 <div class="contact_img">
-                  <img src="assets/images/sainz.png" alt="profile pic" />
+                  <img src="assets/images/messi.jpg" alt="profile pic" />
                 </div>
                 <div class="contact_txt">
-                  <h2>Carlos Sainz</h2>
-                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                  <h2>Leo Messi</h2>
+                  <p>Lorem ipsum dolor sit amet..</p>
                 </div>
               </div>
-              <div class="contact_right unread">
-                <p>11:03 AM</p>
-                <p>4</p>
+              <div class="contact_right">
+                <p>09:03 AM</p>
               </div>
             </div>
           </li>
@@ -201,16 +221,15 @@
             <div class="contact">
               <div class="contact_left">
                 <div class="contact_img">
-                  <img src="assets/images/sainz.png" alt="profile pic" />
+                  <img src="assets/images/lautaro.jpg" alt="profile pic" />
                 </div>
                 <div class="contact_txt">
-                  <h2>Carlos Sainz</h2>
-                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                  <h2>Lautaro Martinez</h2>
+                  <p>Lorem ipsum dolor sit amet..</p>
                 </div>
               </div>
-              <div class="contact_right unread">
-                <p>11:03 AM</p>
-                <p>4</p>
+              <div class="contact_right">
+                <p>08:49 AM</p>
               </div>
             </div>
           </li>
@@ -218,49 +237,86 @@
             <div class="contact">
               <div class="contact_left">
                 <div class="contact_img">
-                  <img src="assets/images/sainz.png" alt="profile pic" />
+                  <img src="assets/images/jeff.jpg" alt="profile pic" />
                 </div>
                 <div class="contact_txt">
-                  <h2>Carlos Sainz</h2>
-                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                  <h2>Jeff Bezos</h2>
+                  <p>Si, ti cedo il 50% di A..</p>
                 </div>
               </div>
               <div class="contact_right unread">
-                <p>11:03 AM</p>
-                <p>4</p>
+                <p>07:23 AM</p>
+                <p>1</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/mark.jpg" alt="profile pic" />
+                </div>
+                <div class="contact_txt">
+                  <h2>Mark Zuckerberg</h2>
+                  <p>Tu: Ma chi lo usa piu' Mess...</p>
+                </div>
+              </div>
+              <div class="contact_right">
+                <p>03:43 AM</p>
               </div>
             </div>
           </li>
         </ul>
       </section>
-      <section id="main_right" class="w-3/4 py-6 px-4">
+      <section
+        id="main_right"
+        class="w-3/4 max-sm:w-full max-lg:w-full py-6 px-4"
+      >
         <header
-          id="chat_header "
-          class="flex items-center justify-between h-[10%] px-2"
+          id="chat_header"
+          class="flex items-center justify-between h-[10%] px-2 max-sm:mb-4"
         >
           <div id="chat_header-left" class="flex items-center gap-4">
-            <div id="chat_header-left--image">
+            <div
+              id="chat_header-left--image"
+              class="max-sm:flex max-sm:items-center max-lg:flex max-lg:items-center max-sm:gap-2 max-sm:mr-4 max-lg:gap-2 max-lg:mr-4"
+            >
+              <button>
+                <span class="material-symbols-outlined"> arrow_back_ios </span>
+              </button>
               <img
                 src="assets/images/digitazon.png"
                 alt="chat image"
-                class="rounded-full w-10"
+                class="rounded-full w-10 max-sm:w-8"
               />
             </div>
             <div id="chat_header-left--text">
-              <h2>Full-stack Dev [Feb2023]</h2>
-              <p>
-                Andrea, Digitazon Angelica, Cristian, Davide G, Francesco ed
-                altri..
+              <h2 class="text-lg max-sm:text-sm font-semibold">Full-stack Dev [Feb2023]</h2>
+              <p class="max-sm:hidden text-xs">
+                Riccardo sta scrivendo...
               </p>
             </div>
           </div>
-          <div id="chat_header-right" class="flex items-center gap-4">
-            <span class="material-symbols-outlined"> videocam </span>
-            <span class="material-symbols-outlined"> call </span>
-            <span class="material-symbols-outlined"> search </span>
+          <div
+            id="chat_header-right"
+            class="flex items-center gap-4 max-sm:gap-0"
+          >
+            <button>
+              <span class="material-symbols-outlined"> videocam </span>
+            </button>
+            <button>
+              <span class="material-symbols-outlined"> call </span>
+            </button>
+            <button>
+              <span class="material-symbols-outlined"> search </span>
+            </button>
           </div>
         </header>
-        <div id="chat " class="h-[80%] bg-zinc-700 rounded-lg py-4">
+        <!-- ho utilizzato la classe bg-[url] per simulare uno sfondo personalizzato -->
+        <div
+          id="chat"
+          class="h-[80%] bg-[url('assets/images/wallpaper.jpg')] bg-no-repeat bg-cover bg-center rounded-lg p-4 shadow-xl"
+        >
           <div id="messages" class="max-w-6xl mx-auto">
             <div class="received_message">
               <header class="received_message-header">
@@ -292,16 +348,25 @@
             </div>
           </div>
         </div>
-        <div id="chat_input" class="flex items-center gap-4 p-4 h-[10%]">
-          <span class="material-symbols-outlined"> mood </span>
-          <span class="material-symbols-outlined"> attach_file </span>
+        <div
+          id="chat_input"
+          class="flex items-center gap-4 max-sm:gap-0 p-4 h-[10%]"
+        >
+          <button><span class="material-symbols-outlined"> mood </span></button>
+          <button>
+            <span class="material-symbols-outlined"> attach_file </span>
+          </button>
           <input
             type="text"
             placeholder="Type a message"
-            class="w-full outline-none rounded-full bg-zinc-800"
+            class="w-full outline-none rounded-full bg-zinc-700 p-3 max-sm:mx-2"
           />
-          <!-- Ho messo il microfono di colore verde, per evidenziare bene il pulsante da utilizzare per inviare il messaggio-->
-          <span class="material-symbols-outlined text-emerald-600"> send </span>
+          <!-- Ho messo questo bottone di colore verde, per evidenziare bene il pulsante da utilizzare per inviare il messaggio-->
+          <button>
+            <span class="material-symbols-outlined text-emerald-600">
+              send
+            </span>
+          </button>
         </div>
       </section>
     </main>
