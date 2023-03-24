@@ -1,129 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Whatsapp Web</title>
-    <script src='https://cdn.tailwindcss.com'></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style type='text/tailwindcss'>
-    @layer components {
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style type="text/tailwindcss">
+      @layer components {
+        #main_left > header > ul > li,
+        #chat_header-right > span,
+        #chat_input > span {
+          @apply flex items-center p-3 rounded-full hover:bg-zinc-700 cursor-pointer;
+        }
 
         .contact {
-            @apply flex items-center my-6;
+          @apply flex items-center my-6 p-2 cursor-pointer justify-between rounded-lg hover:bg-zinc-700;
         }
 
-        .contact_left > img {
-            @apply rounded-full w-14;
+        .contact_left {
+          @apply flex items-center w-4/5;
         }
 
-        .contact_middle {
-            @apply mx-4;
+        .contact_img > img {
+          @apply rounded-full w-14;
         }
 
-        .contact_middle > h2 {
-            @apply text-xl;
+        .contact_txt {
+          @apply mx-4;
         }
 
-        .contact_middle > p {
-            @apply text-sm;
+        .contact_txt > h2 {
+          @apply text-xl;
         }
 
-        .contact_right > p {
-            @apply text-sm;
+        .contact_txt > p {
+          @apply text-sm;
         }
-    }
-    @layer base {
+
+        .contact_right {
+          @apply text-sm flex flex-col items-end;
+        }
+
+        .contact_right.unread {
+          @apply text-emerald-600 font-bold;
+        }
+
+        .contact_right.unread > p:last-child {
+          @apply py-1 px-2 text-white bg-emerald-600 rounded-full;
+        }
+
+        .received_message {
+          @apply max-w-sm p-3 rounded-lg bg-zinc-800 shadow-lg mb-4 flex flex-col;
+        }
+
+        .received_message > p:last-child {
+          @apply ml-auto text-sm text-gray-400;
+        }
+
+        .received_message-header {
+          @apply flex justify-between text-sm text-gray-400 mb-2;
+        }
+
+        .sended_message {
+          @apply max-w-sm ml-auto p-3 rounded-lg bg-emerald-800 shadow-lg mb-4 flex flex-col;
+        }
+
+        .sended_message > p:last-child {
+          @apply ml-auto text-sm text-gray-400;
+        }
+      }
+      @layer base {
         body {
-            @apply bg-zinc-800 text-white;
+          @apply bg-zinc-800 text-white;
         }
-    }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <main class="flex">
-        <section id="main_left" class="w-1/3 p-4">
-            <header>
-                <ul class="flex">
-                    <li>Chats</li>
-                    <li>Tel</li>
-                    <li>Stories</li>
-                    <li>You</li>
-                </ul>
-                <input type="text">
-                <p>Archived</p>
-            </header>
-            <div id="main_left-contacts">
-                <div class="contact">
-                    <div class="contact_left">
-                        <img src="assets/images/sainz.png" alt="profile pic">
-                    </div>
-                    <div class="contact_middle">
-                        <h2>Carlos Sainz</h2>
-                        <p>Per curiosita', cos'e' questa attivita di D..</p>
-                    </div>
-                    <div class="contact_right">
-                        <p>11:03 AM</p>
-                    </div>
+      <section id="main_left" class="w-1/4 py-6 px-4">
+        <header>
+          <!-- La piccola barra di sinistra della traccia, l'ho spostata usandola come header di questa sezione, cosi' da essere piu' visibili -->
+          <ul class="flex justify-between">
+            <li><span class="material-symbols-outlined"> chat </span></li>
+            <li><span class="material-symbols-outlined"> call </span></li>
+            <li>
+              <span class="material-symbols-outlined"> web_stories </span>
+            </li>
+            <li>
+              <span class="material-symbols-outlined"> account_circle </span>
+            </li>
+          </ul>
+          <div
+            class="main_left-searchbar my-8 flex items-center bg-zinc-600 p-2 rounded-lg"
+          >
+            <input
+              type="text"
+              placeholder="Search or start a new chat"
+              class="w-full bg-zinc-600 outline-none"
+            />
+            <span class="material-symbols-outlined"> search </span>
+          </div>
+
+          <button
+            class="flex items-center gap-4 p-2 w-full rounded-lg hover:bg-zinc-700"
+          >
+            <span class="material-symbols-outlined"> inventory_2 </span>
+            Archived
+          </button>
+        </header>
+        <ul id="main_left-contacts">
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/sainz.png" alt="profile pic" />
                 </div>
-                <div class="contact">
-                    <div class="contact_left">
-                        <img src="assets/images/sainz.png" alt="profile pic">
-                    </div>
-                    <div class="contact_middle">
-                        <h2>Carlos Sainz</h2>
-                        <p>Per curiosita', cos'e' questa attivita di D..</p>
-                    </div>
-                    <div class="contact_right">
-                        <p>11:03 AM</p>
-                    </div>
+                <div class="contact_txt">
+                  <h2>Carlos Sainz</h2>
+                  <p>Per curiosita', cos'e' questa attivita di D..</p>
                 </div>
-                <div class="contact">
-                    <div class="contact_left">
-                        <img src="assets/images/sainz.png" alt="profile pic">
-                    </div>
-                    <div class="contact_middle">
-                        <h2>Carlos Sainz</h2>
-                        <p>Per curiosita', cos'e' questa attivita di D..</p>
-                    </div>
-                    <div class="contact_right">
-                        <p>11:03 AM</p>
-                    </div>
-                </div>
-                <div class="contact">
-                    <div class="contact_left">
-                        <img src="assets/images/sainz.png" alt="profile pic">
-                    </div>
-                    <div class="contact_middle">
-                        <h2>Carlos Sainz</h2>
-                        <p>Per curiosita', cos'e' questa attivita di D..</p>
-                    </div>
-                    <div class="contact_right">
-                        <p>11:03 AM</p>
-                    </div>
-                </div>
+              </div>
+              <div class="contact_right unread">
+                <p>11:03 AM</p>
+                <p>4</p>
+              </div>
             </div>
-        </section>
-        <section id="main_right" class="w-2/3 p-4">
-            <header class="flex items-center justify-between">
-                <div id="chat_header-left" class="flex items-center gap-4">
-                    <div id="chat_header-left--image">
-                        <img src="assets/images/digitazon.png" alt="chat image" class="rounded-full w-10">
-                    </div>
-                    <div id="chat_header-left--text">
-                        <h2>Full-stack Dev [Feb2023]</h2>
-                        <p>Andrea, Digitazon Angelica, Cristian, Davide G, Francesco ed altri..</p>
-                    </div>
+          </li>
+          <div class="contact">
+            <div class="contact_left">
+              <div class="contact_img">
+                <img src="assets/images/digitazon.png" alt="profile pic" />
+              </div>
+              <div class="contact_txt">
+                <h2>Full-stack Dev [Feb2023]</h2>
+                <p>Tu: Anche io sono in attesa</p>
+              </div>
+            </div>
+            <div class="contact_right">
+              <p>9:36 AM</p>
+            </div>
+          </div>
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/sainz.png" alt="profile pic" />
                 </div>
-                <div id="chat_header-right">
-                    <span>videocall</span>
-                    <span>call</span>
-                    <span>Linea</span>
-                    <span>search</span>
+                <div class="contact_txt">
+                  <h2>Carlos Sainz</h2>
+                  <p>Per curiosita', cos'e' questa attivita di D..</p>
                 </div>
-            </header>
-        </section>
+              </div>
+              <div class="contact_right unread">
+                <p>11:03 AM</p>
+                <p>4</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/sainz.png" alt="profile pic" />
+                </div>
+                <div class="contact_txt">
+                  <h2>Carlos Sainz</h2>
+                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                </div>
+              </div>
+              <div class="contact_right unread">
+                <p>11:03 AM</p>
+                <p>4</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/sainz.png" alt="profile pic" />
+                </div>
+                <div class="contact_txt">
+                  <h2>Carlos Sainz</h2>
+                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                </div>
+              </div>
+              <div class="contact_right unread">
+                <p>11:03 AM</p>
+                <p>4</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/sainz.png" alt="profile pic" />
+                </div>
+                <div class="contact_txt">
+                  <h2>Carlos Sainz</h2>
+                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                </div>
+              </div>
+              <div class="contact_right unread">
+                <p>11:03 AM</p>
+                <p>4</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="contact">
+              <div class="contact_left">
+                <div class="contact_img">
+                  <img src="assets/images/sainz.png" alt="profile pic" />
+                </div>
+                <div class="contact_txt">
+                  <h2>Carlos Sainz</h2>
+                  <p>Per curiosita', cos'e' questa attivita di D..</p>
+                </div>
+              </div>
+              <div class="contact_right unread">
+                <p>11:03 AM</p>
+                <p>4</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section id="main_right" class="w-3/4 py-6 px-4">
+        <header
+          id="chat_header "
+          class="flex items-center justify-between h-[10%] px-2"
+        >
+          <div id="chat_header-left" class="flex items-center gap-4">
+            <div id="chat_header-left--image">
+              <img
+                src="assets/images/digitazon.png"
+                alt="chat image"
+                class="rounded-full w-10"
+              />
+            </div>
+            <div id="chat_header-left--text">
+              <h2>Full-stack Dev [Feb2023]</h2>
+              <p>
+                Andrea, Digitazon Angelica, Cristian, Davide G, Francesco ed
+                altri..
+              </p>
+            </div>
+          </div>
+          <div id="chat_header-right" class="flex items-center gap-4">
+            <span class="material-symbols-outlined"> videocam </span>
+            <span class="material-symbols-outlined"> call </span>
+            <span class="material-symbols-outlined"> search </span>
+          </div>
+        </header>
+        <div id="chat " class="h-[80%] bg-zinc-700 rounded-lg py-4">
+          <div id="messages" class="max-w-6xl mx-auto">
+            <div class="received_message">
+              <header class="received_message-header">
+                <p>+39 3270000000</p>
+                <p>Filippo</p>
+              </header>
+              <p>Tutti in attesa?</p>
+              <p>9:35 AM</p>
+            </div>
+            <div class="received_message">
+              <header class="received_message-header">
+                <p>+39 3270000001</p>
+                <p>Cristian</p>
+              </header>
+              <p>Si, sto aspettando</p>
+              <p>9:36 AM</p>
+            </div>
+            <div class="received_message">
+              <header class="received_message-header">
+                <p>+39 3270000000</p>
+                <p>Filippo</p>
+              </header>
+              <p>Ah, va bene</p>
+              <p>9:36 AM</p>
+            </div>
+            <div class="sended_message">
+              <p>Anche io sono in attesa</p>
+              <p>9:36 AM</p>
+            </div>
+          </div>
+        </div>
+        <div id="chat_input" class="flex items-center gap-4 p-4 h-[10%]">
+          <span class="material-symbols-outlined"> mood </span>
+          <span class="material-symbols-outlined"> attach_file </span>
+          <input
+            type="text"
+            placeholder="Type a message"
+            class="w-full outline-none rounded-full bg-zinc-800"
+          />
+          <!-- Ho messo il microfono di colore verde, per evidenziare bene il pulsante da utilizzare per inviare il messaggio-->
+          <span class="material-symbols-outlined text-emerald-600"> send </span>
+        </div>
+      </section>
     </main>
-</body>
+  </body>
 </html>
